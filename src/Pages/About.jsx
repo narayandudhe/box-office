@@ -1,9 +1,10 @@
+import MainPageLayout from "../components/MainPageLayout"
 
 const About = () => {
   return (
-    <div>
+    <MainPageLayout>
       this is about
-    </div>
+    </MainPageLayout>
   )
 }
 

@@ -6,7 +6,6 @@ import Home from './Pages/Home';
 function App() {
   return (
     <div>
-      <Navs/>
       <Switch>
         <Route exact path="/">
           <Home />
