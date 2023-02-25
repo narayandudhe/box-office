@@ -1,13 +1,15 @@
-import Navs from "./Navs"
+import Title from '../Pages/Title';
+import Navs from './Navs';
 
-const MainPageLayout = ({children}) => {
+const MainPageLayout = ({ children }) => {
   return (
     <div>
-      <Navs/>
+      <Title title="Box-Office" subtitle="This actor and tv shows" />
+      <Navs />
 
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default MainPageLayout
+export default MainPageLayout;
