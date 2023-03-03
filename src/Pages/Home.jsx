@@ -16,7 +16,8 @@ const Home = () => {
       OnSearch();
     }
   };
-  const OnSearch = () => {
+  const OnSearch = ev => {
+    ev.preventDefault();
     const result = apiGet(`/search/${SearchOption}?q=${Input}`).then(result => {
       setresults(result);
     });
@@ -41,39 +42,39 @@ const Home = () => {
 
   return (
     <MainPageLayout>
-      <input
-        type="text"
-        placeholder="Serarh for Something"
-        onChange={InputOnChange}
-        onKeyDown={onkeydown}
-        value={Input}
-      />
-      <div>
-        <label htmlFor="shows-search">
-          Shows
-          <input
-            type="radio"
-            id="shows-search"
-            checked={isShowsSearch}
-            onChange={OnRadioChange}
-            value="shows"
-          />
-        </label>
+      <form onSubmit={OnSearch}>
+        <input
+          type="text"
+          placeholder="Serarh for Something"
+          onChange={InputOnChange}
+          onKeyDown={onkeydown}
+          value={Input}
+        />
+        <div>
+          <label htmlFor="shows-search">
+            Shows
+            <input
+              type="radio"
+              id="shows-search"
+              checked={isShowsSearch}
+              onChange={OnRadioChange}
+              value="shows"
+            />
+          </label>
 
-        <label htmlFor="actors-search">
-          Actors
-          <input
-            type="radio"
-            id="actors-search"
-            checked={!isShowsSearch}
-            onChange={OnRadioChange}
-            value="people"
-          />
-        </label>
-      </div>
-      <button type="button" onClick={OnSearch}>
-        Search
-      </button>
+          <label htmlFor="actors-search">
+            Actors
+            <input
+              type="radio"
+              id="actors-search"
+              checked={!isShowsSearch}
+              onChange={OnRadioChange}
+              value="people"
+            />
+          </label>
+        </div>
+        <button type="submit">Search</button>
+      </form>
       {rendorResult()}
     </MainPageLayout>
   );
