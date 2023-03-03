@@ -2,11 +2,12 @@ import { useState } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
 import ShowGrid from '../components/shows/ShowGrid';
-import { apiGet } from '../misc/config';
+import { searchForShows } from '../misc/config';
 const Home = () => {
   const [Input, setInput] = useState('');
   const [results, setresults] = useState(null);
   const [SearchOption, setSearchOption] = useState('shows');
+  const [apiResultError, setapiResultError] = useState(null);
 
   const InputOnChange = ev => {
     setInput(ev.target.value);
@@ -18,11 +19,19 @@ const Home = () => {
   };
   const OnSearch = ev => {
     ev.preventDefault();
-    apiGet(`/search/${SearchOption}?q=${Input}`).then(result => {
-      setresults(result);
-    });
+    try {
+      setapiResultError(null);
+      searchForShows(Input).then(result => {
+        setresults(result);
+      });
+    } catch (error) {
+      setapiResultError(error);
+    }
   };
   const rendorResult = () => {
+    if (apiResultError) {
+      return <div>{apiResultError.message}</div>;
+    }
     if (results && results.length === 0) {
       return <div>No Result Found</div>;
     }
