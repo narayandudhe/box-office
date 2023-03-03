@@ -18,7 +18,7 @@ const Home = () => {
   };
   const OnSearch = ev => {
     ev.preventDefault();
-    const result = apiGet(`/search/${SearchOption}?q=${Input}`).then(result => {
+    apiGet(`/search/${SearchOption}?q=${Input}`).then(result => {
       setresults(result);
     });
   };
