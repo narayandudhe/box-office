@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
 import ShowGrid from '../components/shows/ShowGrid';
-import { searchForShows } from '../misc/config';
+import { searchForShows, searchForActors } from '../misc/config';
 const Home = () => {
   const [Input, setInput] = useState('');
   const [results, setresults] = useState(null);
@@ -21,9 +21,15 @@ const Home = () => {
     ev.preventDefault();
     try {
       setapiResultError(null);
-      searchForShows(Input).then(result => {
-        setresults(result);
-      });
+      if (SearchOption === 'shows') {
+        searchForShows(Input).then(result => {
+          setresults(result);
+        });
+      } else {
+        searchForActors(Input).then(result => {
+          setresults(result);
+        });
+      }
     } catch (error) {
       setapiResultError(error);
     }
@@ -65,6 +71,7 @@ const Home = () => {
             <input
               type="radio"
               id="shows-search"
+              name="search-option"
               checked={isShowsSearch}
               onChange={OnRadioChange}
               value="shows"
@@ -76,6 +83,7 @@ const Home = () => {
             <input
               type="radio"
               id="actors-search"
+              name="search-option"
               checked={!isShowsSearch}
               onChange={OnRadioChange}
               value="people"

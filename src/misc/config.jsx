@@ -7,7 +7,7 @@ async function apiGet(queryString) {
   return response;
 }
 
-export const searchForShows = strSearch => {
-  const result = apiGet(`/search/shows?q=${strSearch}`);
-  return result;
-};
+export const searchForShows = strSearch =>
+  apiGet(`/search/shows?q=${strSearch}`);
+export const searchForActors = strSearch =>
+  apiGet(`/search/people?q=${strSearch}`);
