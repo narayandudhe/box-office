@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getShowById } from '../../misc/config';
 import { useQuery } from '@tanstack/react-query';
 import ShowMainData from './ShowMainData';
@@ -14,12 +14,21 @@ const ShowShows = () => {
     refetchOnWindowFocus: false,
   });
 
+  // const navigate = useNavigate();
+  // const gobacktoHome = () => {
+  //   navigate('/');
+  // };
   if (showError) {
     return <div>Error occured when loading</div>;
   }
   if (showData) {
     return (
       <div>
+        <Link to="/">Goto Main menu</Link>
+
+        {/* <button type="button" onClick={gobacktoHome}> Go back to Home
+        </button>*/}
+
         <ShowMainData
           image={showData.image}
           name={showData.name}
