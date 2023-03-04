@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 const SearchForm = ({ OnSearch }) => {
   const [Input, setInput] = useState('');
   const [SearchOption, setSearchOption] = useState('shows');
@@ -24,13 +24,6 @@ const SearchForm = ({ OnSearch }) => {
     ev.preventDefault();
     OnSearch(query);
   };
-  console.log('run many tiems');
-  useEffect(() => {
-    console.log('runs chages' + SearchOption);
-    return () => {
-      console.log('runs at the end');
-    };
-  }, [SearchOption]);
 
   return (
     <form onSubmit={Onsubmit}>

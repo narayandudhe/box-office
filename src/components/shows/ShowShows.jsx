@@ -1,26 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { getShowById } from '../../misc/config';
-
-const useShowById = showId => {
-  const [showData, setshowData] = useState(null);
-  const [showError, setshowError] = useState(null);
-  useEffect(() => {
-    async function fetchdata() {
-      try {
-        const data = await getShowById(showId);
-        setshowData(data);
-      } catch (error) {
-        setshowError(error);
-      }
-    }
-    fetchdata();
-  }, [showId]);
-  return { showData, showError };
-};
+import { useQuery } from '@tanstack/react-query';
 const ShowShows = () => {
   const { showId } = useParams();
-  const { showData, showError } = useShowById(showId);
+
+  const { data: showData, error: showError } = useQuery({
+    queryKey: ['show', showId],
+    queryFn: () => getShowById(showId),
+  });
 
   if (showError) {
     return <div>Error occured when loading</div>;
