@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
 import SearchForm from '../components/SearchForm';
@@ -6,17 +6,6 @@ import ShowGrid from '../components/shows/ShowGrid';
 import { searchForShows, searchForActors } from '../misc/config';
 import { useQuery } from '@tanstack/react-query';
 
-const reducerfn = (currentCounter, action) => {
-  switch (action.type) {
-    case 'Increment':
-      return currentCounter + 1;
-    case 'Decrement':
-      return currentCounter - 1;
-    case 'Reset':
-      return 0;
-  }
-  return 0;
-};
 const Home = () => {
   const [filter, setFilter] = useState(null);
 
@@ -51,31 +40,11 @@ const Home = () => {
     }
     return null;
   };
-  const [counter, dispatch] = useReducer(reducerfn, 0);
-  const onIncrement = () => {
-    dispatch({ type: 'Increment' });
-  };
-  const onDecrement = () => {
-    dispatch({ type: 'Decrement' });
-  };
-  const onReset = () => {
-    dispatch({ type: 'Reset' });
-  };
+
   return (
     <MainPageLayout>
       <SearchForm OnSearch={OnSearch} />
-      <div>
-        <p>counter: {counter}</p>
-        <button type="button" onClick={onIncrement}>
-          Increment
-        </button>
-        <button type="button" onClick={onDecrement}>
-          Decrement
-        </button>
-        <button type="button" onClick={onReset}>
-          Reset
-        </button>
-      </div>
+
       {rendorResult()}
     </MainPageLayout>
   );
