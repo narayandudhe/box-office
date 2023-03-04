@@ -1,4 +1,3 @@
-import React from 'react';
 import IMAGE_NOT_FOUND from '../../images/download.jfif';
 import ActorCard from './ActorCard';
 
