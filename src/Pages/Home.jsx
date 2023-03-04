@@ -1,24 +1,15 @@
 import { useState } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
+import SearchForm from '../components/SearchForm';
 import ShowGrid from '../components/shows/ShowGrid';
 import { searchForShows, searchForActors } from '../misc/config';
 const Home = () => {
-  const [Input, setInput] = useState('');
-  const [results, setresults] = useState(null);
-  const [SearchOption, setSearchOption] = useState('shows');
   const [apiResultError, setapiResultError] = useState(null);
+  const [results, setresults] = useState(null);
 
-  const InputOnChange = ev => {
-    setInput(ev.target.value);
-  };
-  const onkeydown = ev => {
-    if (ev.keyCode === 13) {
-      OnSearch();
-    }
-  };
-  const OnSearch = ev => {
-    ev.preventDefault();
+ 
+  const OnSearch = ({Input,SearchOption}) => {
     try {
       setapiResultError(null);
       if (SearchOption === 'shows') {
@@ -50,48 +41,10 @@ const Home = () => {
     }
     return null;
   };
-  const OnRadioChange = ev => {
-    setSearchOption(ev.target.value);
-  };
-  const isShowsSearch = SearchOption === 'shows';
 
   return (
     <MainPageLayout>
-      <form onSubmit={OnSearch}>
-        <input
-          type="text"
-          placeholder="Serarh for Something"
-          onChange={InputOnChange}
-          onKeyDown={onkeydown}
-          value={Input}
-        />
-        <div>
-          <label htmlFor="shows-search">
-            Shows
-            <input
-              type="radio"
-              id="shows-search"
-              name="search-option"
-              checked={isShowsSearch}
-              onChange={OnRadioChange}
-              value="shows"
-            />
-          </label>
-
-          <label htmlFor="actors-search">
-            Actors
-            <input
-              type="radio"
-              id="actors-search"
-              name="search-option"
-              checked={!isShowsSearch}
-              onChange={OnRadioChange}
-              value="people"
-            />
-          </label>
-        </div>
-        <button type="submit">Search</button>
-      </form>
+     <SearchForm OnSearch={OnSearch}/>
       {rendorResult()}
     </MainPageLayout>
   );
