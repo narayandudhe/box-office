@@ -1,28 +1,31 @@
-import ShowsCard from './ShowsCard';
-import IMAGE_NOT_FOUND from '../../images/download.jfif';
+import ShowCard from './ShowsCard';
 import { useStaredShows } from '../lib/useStaredShows';
+import NotFoundImgSrc from '../../images/not-found.png';
 
-const ShowGrid = ({ data }) => {
-  const [staredshows, dispatchstared] = useStaredShows();
-  const onStarClick = showId => {
-    const isstared = staredshows.includes(showId);
-    if (isstared) {
-      dispatchstared({ type: 'Unstar', showId });
+const ShowGrid = ({ shows }) => {
+  const [starredShows, dispatchStarred] = useStaredShows();
+
+  const onStarMeClick = showId => {
+    const isStarred = starredShows.includes(showId);
+
+    if (isStarred) {
+      dispatchStarred({ type: 'UNSTAR', showId });
     } else {
-      dispatchstared({ type: 'Star', showId });
+      dispatchStarred({ type: 'STAR', showId });
     }
   };
+
   return (
     <div>
-      {data.map(({ show }) => (
-        <ShowsCard
-          key={show.id}
-          id={show.id}
-          name={show.name}
-          image={show.image ? show.image.medium : IMAGE_NOT_FOUND}
-          summary={show.summary}
-          onStarClick={onStarClick}
-          isstared={staredshows.includes(show.id)}
+      {shows.map(data => (
+        <ShowCard
+          key={data.show.id}
+          id={data.show.id}
+          name={data.show.name}
+          image={data.show.image ? data.show.image.medium : NotFoundImgSrc}
+          summary={data.show.summary}
+          onStarMeClick={onStarMeClick}
+          isStarred={starredShows.includes(data.show.id)}
         />
       ))}
     </div>

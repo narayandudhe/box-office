@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const LINKS = [
   { path: '/', text: 'Home Page' },
-  { path: '/about', text: 'About Page' },
+  { path: '/starred', text: 'starred Page' },
 ];
 const Navs = () => {
   return (

@@ -12,7 +12,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/stared" element={<Starred />}></Route>
+          <Route path="/starred" element={<Starred />}></Route>
           <Route path="/show/:showId" element={<ShowShows />}></Route>
           <Route>this is 404 page</Route>
         </Routes>
